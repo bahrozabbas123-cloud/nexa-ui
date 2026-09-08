@@ -1,69 +1,21 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Check, Layers3, Moon, MoveUpRight, Play, Sparkles, Zap } from "lucide-react";
+import { Card } from "@/components/ui";
 
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+  const features = [
+    { icon: Layers3, title: "A foundation that scales", text: "Thoughtful patterns for teams building dashboards, admin panels, and the next generation of SaaS." },
+    { icon: Zap, title: "Move from idea to shipped", text: "Reusable components and realistic data mean less wiring and more time spent on your product." },
+    { icon: Moon, title: "Designed for every mode", text: "A considered light and dark experience, with responsive layouts that feel native on every screen." },
+  ];
+
+  return <main className="landing">
+    <nav className="landing-nav"><Link href="/" className="brand"><span className="brand-mark">N</span><span className="brand-name">nexa<span>ui</span></span></Link><div className="landing-links"><a href="#features">Features</a><a href="#showcase">Showcase</a><a href="#pricing">Pricing</a></div><div className="landing-nav-actions"><Link href="/login" className="landing-login">Sign in</Link><Link href="/dashboard" className="button button-primary">Open dashboard <ArrowRight size={15} /></Link></div></nav>
+    <section className="landing-hero"><div className="hero-copy"><div className="hero-kicker"><span className="kicker-dot" /> The dashboard starter kit for serious products</div><h1>Build the product.<br /><em>Skip the busywork.</em></h1><p>NexaUI gives your next SaaS a polished, considered foundation, so you can spend your energy on the idea that makes it different.</p><div className="hero-actions"><Link href="/dashboard" className="button button-primary">Explore the dashboard <ArrowRight size={16} /></Link><a href="#showcase" className="play-link"><span><Play size={13} fill="currentColor" /></span> See what is inside</a></div><div className="hero-proof"><div className="proof-avatars"><span className="avatar avatar-coral avatar-sm">JM</span><span className="avatar avatar-blue avatar-sm">SK</span><span className="avatar avatar-green avatar-sm">OD</span><span className="avatar avatar-purple avatar-sm">+2k</span></div><span><strong>Loved by 2,000+ builders</strong><small>Building better software, faster</small></span></div></div><div className="hero-art"><div className="art-glow" /><div className="preview-window"><div className="preview-top"><span className="preview-dots"><i /><i /><i /></span><span className="preview-url">app.nexaui.dev/dashboard</span><span>•••</span></div><div className="preview-body"><div className="preview-sidebar"><span className="mini-logo">N</span><i /><i /><i /><i /><i /></div><div className="preview-main"><div className="preview-welcome"><span>Good morning, Alex</span><b>Oct 2024</b></div><div className="preview-stats"><i /><i /><i /></div><div className="preview-chart"><span className="chart-label">Revenue overview</span><div className="chart-line" /></div><div className="preview-bottom"><i /><i /></div></div></div></div><div className="floating-note note-one"><span className="note-icon"><Sparkles size={13} /></span><span><b>Everything in sync</b><small>Updated just now</small></span></div><div className="floating-note note-two"><span className="note-check"><Check size={13} /></span><span><b>Project on track</b><small>78% complete</small></span></div></div></section>
+    <section className="logo-strip"><span>Built for teams at</span><b>northstar</b><b>orbit</b><b>fable</b><b>frame</b><b>linearish</b></section>
+    <section className="landing-section features-section" id="features"><div className="center-heading"><p className="eyebrow">A better starting point</p><h2>All the thoughtful details,<br /><em>already figured out.</em></h2><p>Not another collection of empty cards. NexaUI is a real, working foundation for the product you want to build.</p></div><div className="feature-grid">{features.map((feature) => <Card key={feature.title} className="feature-card"><span className="feature-icon"><feature.icon size={20} /></span><h3>{feature.title}</h3><p>{feature.text}</p><a href="#showcase">Learn more <MoveUpRight size={14} /></a></Card>)}</div></section>
+    <section className="landing-section showcase-section" id="showcase"><div className="showcase-copy"><p className="eyebrow">The whole picture</p><h2>Your team should never have to hunt for context.</h2><p>From the first glance in the morning to the last decision of the day, NexaUI keeps the important things visible, clear, and close.</p><ul><li><Check size={16} /> Responsive by default</li><li><Check size={16} /> Built with accessible primitives</li><li><Check size={16} /> Easy to make your own</li></ul><Link href="/dashboard" className="text-button">Explore the live dashboard <ArrowRight size={15} /></Link></div><div className="showcase-card"><div className="showcase-card-top"><span>Workspace pulse</span><span className="live-pill"><i /> Live</span></div><div className="pulse-number">84.6 <small>/ 100</small></div><div className="pulse-bars"><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /></div><div className="pulse-footer"><span><b>+12.8%</b> this month</span><span>Health score</span></div></div></section>
+    <section className="pricing-band" id="pricing"><div><p className="eyebrow">Ready when you are</p><h2>Start with a little more<br />momentum.</h2></div><div className="pricing-card"><span>Personal license</span><strong>$79 <small>one-time</small></strong><p>Everything you need to ship your next dashboard.</p><Link href="/dashboard" className="button button-primary">Get NexaUI <ArrowRight size={15} /></Link></div></section>
+    <footer className="landing-footer"><Link href="/" className="brand"><span className="brand-mark">N</span><span className="brand-name">nexa<span>ui</span></span></Link><span>Designed for the next thing.</span><span>© 2024 NexaUI</span></footer>
+  </main>;
 }

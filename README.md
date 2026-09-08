@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NexaUI
 
-## Getting Started
+NexaUI is a polished, reusable SaaS dashboard starter kit built for teams who want to spend less time wiring interface states and more time building their product.
 
-First, run the development server:
+## Features
+
+- Next.js App Router with strict TypeScript
+- Responsive application shell with collapsible desktop sidebar and mobile navigation
+- Light and dark themes
+- Reusable buttons, cards, badges, avatars, progress, inputs, and headings
+- Interactive Recharts visualizations
+- Dashboard, analytics, projects, users, tasks, messages, files, billing, settings, profile, login, and signup routes
+- Realistic local mock data with no backend or external API
+- Accessible labels, focusable controls, semantic tables, and responsive overflow handling
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000` to view the landing page or `/dashboard` for the product UI.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Commands
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `npm run dev` starts the development server.
+- `npm run build` creates a production build.
+- `npm run start` serves the production build.
+- `npm run lint` checks the codebase with ESLint.
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+- `src/app` contains App Router pages and route entry points.
+- `src/components` contains the shell, dashboard, charts, and UI primitives.
+- `src/data` contains typed mock data and navigation configuration.
+- `src/app/globals.css` contains theme tokens and responsive component styles.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Customization
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Change the color tokens at the top of `src/app/globals.css` to rebrand the kit. Add new navigation items in `src/data/mock.ts`, then create a page under `src/app` or extend the shared dynamic page for a quick new workspace view. Reuse `Card`, `Button`, `Badge`, `Avatar`, `Progress`, and `Input` instead of introducing one-off controls.
 
-## Deploy on Vercel
+The dashboard data is intentionally local in `src/data/mock.ts`. Replace those arrays with your own typed data fetching layer when your backend is ready. No authentication, billing, payment, or API provider is connected in this starter.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+NexaUI can be deployed to any platform that supports Next.js. Run `npm run build` locally first, then configure your platform to use `npm run start` for a Node deployment. For a managed Next.js deployment, connect the repository and use the default build settings.
