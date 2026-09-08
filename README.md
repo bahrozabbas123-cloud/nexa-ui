@@ -1,6 +1,14 @@
 # NexaUI
 
 NexaUI is a polished, reusable SaaS dashboard starter kit built for teams who want to spend less time wiring interface states and more time building their product.
+## Live Demo
+
+**[Open NexaUI](https://nexa-ui-nine.vercel.app)**
+
+## GitHub Repository
+
+**[View Source Code](https://github.com/bahrozabbas123-cloud/nexa-ui)**
+
 
 ## Features
 
@@ -45,3 +53,5 @@ The dashboard data is intentionally local in `src/data/mock.ts`. Replace those a
 ## Deployment
 
 NexaUI can be deployed to any platform that supports Next.js. Run `npm run build` locally first, then configure your platform to use `npm run start` for a Node deployment. For a managed Next.js deployment, connect the repository and use the default build settings.
+
+
