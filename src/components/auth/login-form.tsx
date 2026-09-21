@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowRight, LoaderCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { apiUrl } from "@/lib/api";
 import { createDemoSession, saveDemoAccount } from "@/lib/auth";
 import { setToken } from "@/lib/jwt";
 
@@ -41,7 +42,7 @@ export function LoginForm() {
     const loginPassword = password;
     setLoading(true);
     // Call backend login API
-    fetch("http://localhost:5000/api/auth/login", {
+    fetch(apiUrl("/api/auth/login"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

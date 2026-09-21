@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ArrowRight, LoaderCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { apiUrl } from "@/lib/api";
 import { createDemoSession, saveDemoAccount } from "@/lib/auth";
 
 const demoEmail = "demo@nexaui.dev";
@@ -59,7 +60,7 @@ export function SignupForm() {
 
     setLoading(true);
     try {
-  const res = await fetch('http://localhost:5000/api/auth/signup', {
+  const res = await fetch(apiUrl('/api/auth/signup'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name: name.trim(), email: email.trim().toLowerCase(), password })

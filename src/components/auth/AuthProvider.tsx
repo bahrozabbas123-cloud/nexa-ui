@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
+import { apiUrl } from '@/lib/api';
 import { getToken, clearToken } from '@/lib/jwt';
 
 export interface User {
@@ -40,7 +41,7 @@ export const AuthProvider = ({ children }: ProviderProps) => {
 
   const fetchCurrentUser = async (token: string) => {
     try {
-      const res = await fetch('/api/auth/me', {
+      const res = await fetch(apiUrl('/api/auth/me'), {
         headers: {
           Authorization: `Bearer ${token}`,
         },
