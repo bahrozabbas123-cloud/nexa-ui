@@ -8,6 +8,13 @@ import { createDemoSession, saveDemoAccount } from "@/lib/auth";
 const demoEmail = "demo@nexaui.dev";
 const demoPassword = "nexaui-demo";
 
+
+
+
+
+
+
+
 type SignupErrors = { name?: string; email?: string; password?: string; confirmPassword?: string; form?: string };
 
 export function SignupForm() {
@@ -43,7 +50,7 @@ export function SignupForm() {
     router.push("/dashboard");
   }
 
-  function submitSignup(event: React.FormEvent<HTMLFormElement>) {
+  async function submitSignup(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (loading) return;
     const nextErrors = validate();
@@ -51,7 +58,23 @@ export function SignupForm() {
     if (Object.keys(nextErrors).length > 0) return;
 
     setLoading(true);
-    window.setTimeout(completeSignup, 450);
+    try {
+  const res = await fetch('http://localhost:5000/api/auth/signup', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: name.trim(), email: email.trim().toLowerCase(), password })
+  });
+  const data = await res.json();
+  if (!res.ok) {
+    setErrors(prev => ({ ...prev, form: data.error || 'Signup failed' }));
+  } else {
+    router.push('/login');
+  }
+} catch (e) {
+  setErrors(prev => ({ ...prev, form: 'Network error' }));
+} finally {
+  setLoading(false);
+}
   }
 
   function useDemoAccount() {

@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { ArrowRight, LoaderCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { createDemoSession, getDemoAccount, saveDemoAccount } from "@/lib/auth";
+import { createDemoSession, saveDemoAccount } from "@/lib/auth";
+import { setToken } from "@/lib/jwt";
 
 const demoEmail = "demo@nexaui.dev";
 const demoPassword = "nexaui-demo";
@@ -37,16 +38,37 @@ export function LoginForm() {
     if (Object.keys(nextErrors).length > 0) return;
 
     const loginEmail = email.trim().toLowerCase();
-    const storedAccount = getDemoAccount();
-    const validDemoCredentials = loginEmail === demoEmail && password === demoPassword;
-    const validStoredCredentials = storedAccount?.email === loginEmail && storedAccount.password === password;
-    if (!validDemoCredentials && !validStoredCredentials) {
-      setErrors({ form: "The email or password is incorrect." });
-      return;
-    }
-
+    const loginPassword = password;
     setLoading(true);
-    window.setTimeout(() => completeLogin(loginEmail, validStoredCredentials ? storedAccount.name : "Demo User"), 450);
+    // Call backend login API
+    fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: loginEmail, password: loginPassword }),
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        if (!res.ok) {
+          // Backend returns { error: "message" }
+          setErrors({ form: data.error || "Login failed." });
+          setLoading(false);
+          return;
+        }
+        // Expected response: { token, user: { id, name, email, role, avatar, createdAt, updatedAt } }
+        const { token } = data;
+        if (token) {
+          setToken(token);
+        }
+        // Optionally store user info in demo session for UI consistency
+        createDemoSession({ name: data.user?.name || "User", email: loginEmail }, remember);
+        router.push("/dashboard");
+      })
+      .catch((err) => {
+        setErrors({ form: "Network error. Please try again later." });
+        setLoading(false);
+      });
   }
 
   function useDemoAccount() {
