@@ -77,7 +77,12 @@ app.get('/api/auth/me', authenticate, async (req: Request, res: Response) => {
 
 export default app;
 
-// Start the server (dev entrypoint is `tsx watch src/server.ts`).
-app.listen(PORT, () => {
-  console.log(`NexaUI backend listening on http://localhost:${PORT}`);
-});
+// On Vercel this module is loaded as a Serverless Function that invokes the
+// exported `app` directly, so binding a port is unnecessary and would leave a
+// stray listener in the function container. Vercel sets `VERCEL=1` for us;
+// locally (and under `npm start`) the standalone server still starts as before.
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`NexaUI backend listening on http://localhost:${PORT}`);
+  });
+}
